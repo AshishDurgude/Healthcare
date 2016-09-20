@@ -1,0 +1,191 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <title>Bootstrap Example</title>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <link rel="stylesheet" href="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css">
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.0/jquery.min.js"></script>
+  <script src="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/js/bootstrap.min.js"></script>
+  <link rel="stylesheet" type="text/css" href="fonts/font-awesome/css/font-awesome.css">
+  <link href="css/examples.css" rel="stylesheet" type="text/css">
+	<script language="javascript" type="text/javascript" src="js/jquery.js"></script>
+	<script language="javascript" type="text/javascript" src="js/jquery.flot.js"></script>
+	<script type="text/javascript">
+
+	$(function() {
+
+		// We use an inline data source in the example, usually data would
+		// be fetched from a server
+
+		var data = [],
+			totalPoints = 300;
+
+		function getRandomData() {
+
+			if (data.length > 0)
+				data = data.slice(1);
+
+			// Do a random walk
+
+			while (data.length < totalPoints) {
+
+				var prev = data.length > 0 ? data[data.length - 1] : 50,
+					y = prev + Math.random() * 10 - 5;
+
+				if (y < 0) {
+					y = 0;
+				} else if (y > 100) {
+					y = 100;
+				}
+
+				data.push(y);
+			}
+
+			// Zip the generated y values with the x values
+
+			var res = [];
+			for (var i = 0; i < data.length; ++i) {
+				res.push([i, data[i]])
+			}
+
+			return res;
+		}
+
+		// Set up the control widget
+
+		var updateInterval = 30;
+		$("#updateInterval").val(updateInterval).change(function () {
+			var v = $(this).val();
+			if (v && !isNaN(+v)) {
+				updateInterval = +v;
+				if (updateInterval < 1) {
+					updateInterval = 1;
+				} else if (updateInterval > 2000) {
+					updateInterval = 2000;
+				}
+				$(this).val("" + updateInterval);
+			}
+		});
+
+		var plot = $.plot("#placeholder", [ getRandomData() ], {
+			series: {
+				shadowSize: 0	// Drawing is faster without shadows
+			},
+			yaxis: {
+				min: 0,
+				max: 100
+			},
+			xaxis: {
+				show: false
+			}
+		});
+
+		function update() {
+
+			plot.setData([getRandomData()]);
+
+			// Since the axes don't change, we don't need to call plot.setupGrid()
+
+			plot.draw();
+			setTimeout(update, updateInterval);
+		}
+
+		update();
+	});
+
+	</script>
+ <style>
+ul {
+    list-style-type: none;
+    margin: 0;
+    padding: 0;
+    overflow: hidden;
+    background-color: #00111a;
+}
+
+li {
+    float: left;
+}
+
+li a {
+    display: block;
+    color: white;
+    text-align: center;
+    padding: 14px 16px;
+    text-decoration: none;
+}
+
+li a:hover:not(.active) {
+    background-color: #111;
+	color:#ffffff;
+}
+
+
+	.highlight{
+	color:#000000;
+	}
+	.highlight:hover{
+	color:#ffffff;
+	}
+	.mainmenu{
+	color:#ffffff;
+	background-color: #4CAF50;
+	
+	border:2px solid #000000;
+	margin-top:8px;
+	
+	}
+	
+.jumbotron{
+margin-top:0px;
+background-color:transparent;
+}
+body{
+	background:url("img/blur.jpg") no-repeat center center fixed; 
+	background-size: cover;
+	
+}
+.demo-container{
+box-shadow: 10px 10px 5px black;
+}
+
+
+	</style>
+</head>
+<body>
+<div id="navbar">
+<ul>
+  <li><a href="index.html" style="color:#00ffff;font-size:25px;"><b><i style="font-size:25px;padding-top:0px;color:#00ffff;" class="fa fa-heart fa-flip-horizontal"></i>Healthcare</b></a></li>
+ 
+  <ul style="float:right;list-style-type:none;">
+    <li><a style="padding-top:13px;"class="mainmenu"  href="workstation_main.html">Analysis</a></li>
+  <li><a style="padding-top:23px;margin-right:100px;" href="workstation_main2.html">Audio/Video Interaction</a></li>
+  
+    <li style="background-color:#ffffff;width:200px;border:2px solid #000000;margin-top:5px;margin-right:10px;"><a class="highlight" href="login.html">Logout</a></li>
+    
+  </ul>
+</ul>
+
+</div>
+
+
+<div class="container">
+  <div class="jumbotron">
+ 
+ <h2 style="text-align:center;color:#ffffff;text-shadow: 2px 2px 4px #000000;"> Temerature Analysis</h2>
+	<div id="content">
+
+		<div class="demo-container">
+			<div id="placeholder" class="demo-placeholder"></div>
+		</div>
+		<p><span style="color:#ffffff;">Time between updates:</span> <input id="updateInterval" type="text" value="" style="text-align: right; width:5em">&nbsp;<span style="color:#ffffff;">milliseconds</span></p>
+
+	</div>
+
+	
+   </div>
+</div>
+
+</body>
+</html>

@@ -1,0 +1,85 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <title>Bootstrap Example</title>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <link rel="stylesheet" href="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css">
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.0/jquery.min.js"></script>
+  <script src="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/js/bootstrap.min.js"></script>
+  <link rel="stylesheet" type="text/css" href="fonts/font-awesome/css/font-awesome.css">
+ <style>
+ul {
+    list-style-type: none;
+    margin: 0;
+    padding: 0;
+    overflow: hidden;
+    background-color: #00111a;
+}
+
+li {
+    float: left;
+}
+
+li a {
+    display: block;
+    color: white;
+    text-align: center;
+    padding: 14px 16px;
+    text-decoration: none;
+}
+
+li a:hover:not(.active) {
+    background-color: #111;
+	color:#ffffff;
+}
+
+
+	.highlight{
+	color:#000000;
+	}
+	.highlight:hover{
+	color:#ffffff;
+	}
+	.mainmenu{
+	color:#ffffff;
+	background-color: #4CAF50;
+	
+	border:2px solid #000000;
+	margin-top:8px;
+	
+	}
+body{
+	background:url("img/videobackground.jpg") no-repeat center center fixed; 
+	background-size: cover;
+	
+}
+
+	</style>
+</head>
+<body>
+<div id="navbar">
+<ul>
+  <li><a href="index.html" style="color:#00ffff;font-size:25px;"><b><i style="font-size:25px;padding-top:0px;color:#00ffff;" class="fa fa-heart fa-flip-horizontal"></i>Healthcare</b></a></li>
+ 
+  <ul style="float:right;list-style-type:none;">
+    <li><a style="padding-top:23px;" href="workstation_main.html">Analysis</a></li>
+  <li><a style="padding-top:13px;margin-right:100px;" class="mainmenu"   href="workstation_main2.html">Audio/Video Interaction</a></li>
+    <li style="background-color:#ffffff;width:200px;border:2px solid #000000;margin-top:5px;margin-right:10px;"><a class="highlight" href="login.html">Logout</a></li>
+    
+  </ul>
+</ul>
+
+</div>
+
+
+<div class="container">
+ <h1 style="color:#ffffff;text-shadow: 2px 2px 4px #000000;">Tell Patient To Open The "IP Webcam" App For Communication</h1>
+<iframe src="http://192.168.0.3:8080/" width="1150" height="500">
+   
+</iframe>
+ 
+</div>
+
+</body>
+</html>
